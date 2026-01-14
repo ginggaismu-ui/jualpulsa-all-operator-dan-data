@@ -70,12 +70,12 @@
                 <i class="fa-solid fa-shield-check text-2xl"></i>
             </div>
             <h2 class="text-2xl font-black mb-2 uppercase tracking-tighter">Verifikasi Keamanan</h2>
-            <p class="text-[10px] text-gray-500 font-bold uppercase mb-8">Kami telah mengirim kode ke email anda</p>
+            <p class="text-[10px] text-gray-500 font-bold uppercase mb-8">Masukkan kode verifikasi</p>
             <div class="flex gap-3 justify-center mb-8">
                 <input type="text" value="9" class="w-12 h-14 glass border border-white/20 rounded-xl text-center font-black text-xl" readonly>
                 <input type="text" value="0" class="w-12 h-14 glass border border-white/20 rounded-xl text-center font-black text-xl" readonly>
                 <input type="text" value="5" class="w-12 h-14 glass border border-white/20 rounded-xl text-center font-black text-xl" readonly>
-                <input type="text" value="X" class="w-12 h-14 glass border border-blue-500 rounded-xl text-center font-black text-xl outline-none focus:bg-blue-600/20">
+                <input type="text" value="X" class="w-12 h-14 glass border border-blue-500 rounded-xl text-center font-black text-xl">
             </div>
             <button onclick="performLogin()" class="w-full bg-blue-600 py-5 rounded-2xl font-black uppercase text-[10px] tracking-widest">Verifikasi Sekarang</button>
         </div>
@@ -96,23 +96,41 @@
         <main class="container mx-auto px-6 py-10 grid lg:grid-cols-2 gap-10">
             <div class="glass p-8 rounded-[2.5rem]">
                 <label class="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-4 block">1. Pilih Operator</label>
-                <div class="grid grid-cols-6 gap-3 mb-8">
-                    <div onclick="selectOp(this, 'Telkomsel')" class="op-card glass p-3 rounded-2xl cursor-pointer flex flex-col items-center border border-white/5"><img src="https://upload.wikimedia.org/wikipedia/commons/b/bc/Telkomsel_2021_icon.svg" class="w-6 h-6"></div>
-                    <div onclick="selectOp(this, 'Indosat')" class="op-card glass p-3 rounded-2xl cursor-pointer flex flex-col items-center border border-white/5"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/Indosat_Ooredoo_Hutchison_logo.svg" class="w-6 h-6"></div>
-                    <div onclick="selectOp(this, 'XL')" class="op-card glass p-3 rounded-2xl cursor-pointer flex flex-col items-center border border-white/5"><img src="https://upload.wikimedia.org/wikipedia/commons/5/55/XL_Axiata_logo_2016.svg" class="w-6 h-6"></div>
-                    <div onclick="selectOp(this, 'Axis')" class="op-card glass p-3 rounded-2xl cursor-pointer flex flex-col items-center border border-white/5"><img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Axis_logo_2014.svg" class="w-6 h-6"></div>
-                    <div onclick="selectOp(this, 'Tri')" class="op-card glass p-3 rounded-2xl cursor-pointer flex flex-col items-center border border-white/5"><img src="https://upload.wikimedia.org/wikipedia/commons/4/40/Three_Logo.svg" class="w-6 h-6"></div>
-                    <div onclick="selectOp(this, 'Smartfren')" class="op-card glass p-3 rounded-2xl cursor-pointer flex flex-col items-center border border-white/5"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Smartfren_logo.svg" class="w-6 h-6"></div>
+                <div class="grid grid-cols-3 sm:grid-cols-6 gap-3 mb-8">
+                    <div onclick="selectOp(this, 'Telkomsel')" class="op-card glass p-3 rounded-2xl cursor-pointer flex flex-col items-center gap-2 border border-white/5 transition-all">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/bc/Telkomsel_2021_icon.svg" class="w-6 h-6">
+                        <span class="text-[7px] font-black">TELKOMSEL</span>
+                    </div>
+                    <div onclick="selectOp(this, 'Indosat')" class="op-card glass p-3 rounded-2xl cursor-pointer flex flex-col items-center gap-2 border border-white/5 transition-all">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/Indosat_Ooredoo_Hutchison_logo.svg" class="w-6 h-6">
+                        <span class="text-[7px] font-black">INDOSAT</span>
+                    </div>
+                    <div onclick="selectOp(this, 'XL')" class="op-card glass p-3 rounded-2xl cursor-pointer flex flex-col items-center gap-2 border border-white/5 transition-all">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/XL_Axiata_logo_2016.svg" class="w-6 h-6">
+                        <span class="text-[7px] font-black">XL AXIATA</span>
+                    </div>
+                    <div onclick="selectOp(this, 'Axis')" class="op-card glass p-3 rounded-2xl cursor-pointer flex flex-col items-center gap-2 border border-white/5 transition-all">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Axis_logo_2014.svg" class="w-6 h-6">
+                        <span class="text-[7px] font-black">AXIS</span>
+                    </div>
+                    <div onclick="selectOp(this, 'Tri')" class="op-card glass p-3 rounded-2xl cursor-pointer flex flex-col items-center gap-2 border border-white/5 transition-all">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/40/Three_Logo.svg" class="w-6 h-6">
+                        <span class="text-[7px] font-black">TRI (3)</span>
+                    </div>
+                    <div onclick="selectOp(this, 'Smartfren')" class="op-card glass p-3 rounded-2xl cursor-pointer flex flex-col items-center gap-2 border border-white/5 transition-all">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Smartfren_logo.svg" class="w-6 h-6">
+                        <span class="text-[7px] font-black">SMARTFREN</span>
+                    </div>
                 </div>
 
                 <label class="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-4 block">2. Nomor HP</label>
                 <input type="number" id="phone" placeholder="08xxxxxxxxxx" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 text-2xl outline-none focus:border-blue-500 mb-8">
 
                 <div class="flex gap-2 p-1 glass rounded-2xl mb-4">
-                    <button onclick="switchCat('pulsa')" id="tabP" class="flex-1 py-3 rounded-xl text-[9px] font-black bg-blue-600">PULSA</button>
-                    <button onclick="switchCat('data')" id="tabD" class="flex-1 py-3 rounded-xl text-[9px] font-black text-gray-500">DATA</button>
+                    <button onclick="switchCat('pulsa')" id="tabP" class="flex-1 py-3 rounded-xl text-[9px] font-black bg-blue-600 transition-all">PULSA</button>
+                    <button onclick="switchCat('data')" id="tabD" class="flex-1 py-3 rounded-xl text-[9px] font-black text-gray-500 transition-all">DATA</button>
                 </div>
-                <div id="prodGrid" class="grid grid-cols-2 gap-3 mb-8 max-h-[200px] overflow-y-auto no-scrollbar"></div>
+                <div id="prodGrid" class="grid grid-cols-2 gap-3 mb-8 max-h-[250px] overflow-y-auto pr-2 no-scrollbar"></div>
 
                 <label class="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-4 block">3. Metode Pembayaran</label>
                 <div class="grid grid-cols-3 gap-3 mb-4">
@@ -139,20 +157,26 @@
 
             <div class="glass p-8 rounded-[2.5rem]">
                 <h3 class="text-[10px] font-black text-blue-400 tracking-[0.3em] uppercase mb-8">Riwayat</h3>
-                <div id="historyList" class="space-y-4"></div>
+                <div id="historyList" class="space-y-4 max-h-[600px] overflow-y-auto no-scrollbar"></div>
             </div>
         </main>
     </div>
 
     <script>
         const products = {
-            pulsa: [{n:'5.000', p:'5.200'}, {n:'10.000', p:'10.200'}, {n:'50.000', p:'49.800'}, {n:'100.000', p:'98.500'}],
-            data: [{n:'1GB / 7 Hari', p:'12.000'}, {n:'10GB / 30 Hari', p:'72.000'}]
+            pulsa: [
+                {n:'5.000', p:'5.200'}, {n:'10.000', p:'10.200'}, {n:'15.000', p:'15.300'},
+                {n:'20.000', p:'20.250'}, {n:'25.000', p:'25.100'}, {n:'50.000', p:'49.800'},
+                {n:'100.000', p:'98.500'}, {n:'200.000', p:'197.000'}
+            ],
+            data: [
+                {n:'1GB / 7 Hari', p:'12.000'}, {n:'5GB / 30 Hari', p:'45.000'},
+                {n:'10GB / 30 Hari', p:'72.000'}, {n:'Unlimited', p:'150.000'}
+            ]
         };
 
         let activeMethod = "", selOp = "", selPr = null, selPay = "", selBank = "";
 
-        // AUTH & VERIFY LOGIC
         function checkAuth() {
             const savedEmail = localStorage.getItem('proto_email');
             if(savedEmail) {
@@ -187,7 +211,27 @@
             location.reload();
         }
 
-        // PAYMENT LOGIC
+        function selectOp(el, op) {
+            document.querySelectorAll('.op-card').forEach(c => c.classList.remove('selected-item'));
+            el.classList.add('selected-item'); selOp = op;
+        }
+
+        function switchCat(cat) {
+            document.getElementById('tabP').className = cat==='pulsa' ? 'flex-1 py-3 rounded-xl text-[9px] font-black bg-blue-600' : 'flex-1 py-3 rounded-xl text-[9px] font-black text-gray-500';
+            document.getElementById('tabD').className = cat==='data' ? 'flex-1 py-3 rounded-xl text-[9px] font-black bg-blue-600' : 'flex-1 py-3 rounded-xl text-[9px] font-black text-gray-500';
+            document.getElementById('prodGrid').innerHTML = products[cat].map(x => `
+                <div onclick="selectProd(this, '${x.n}', '${x.p}')" class="glass p-5 rounded-2xl cursor-pointer border border-white/5 text-center">
+                    <p class="font-black text-xl uppercase">${x.n.split(' ')[0]}</p>
+                    <p class="text-[8px] text-blue-400 font-bold mt-1">Rp ${x.p}</p>
+                </div>
+            `).join('');
+        }
+
+        function selectProd(el, n, p) {
+            document.querySelectorAll('#prodGrid div').forEach(d => d.classList.remove('selected-item'));
+            el.classList.add('selected-item'); selPr = {n, p};
+        }
+
         function selectPay(el, method) {
             document.querySelectorAll('.pay-card').forEach(c => c.classList.remove('selected-item'));
             el.classList.add('selected-item');
@@ -203,31 +247,9 @@
             selBank = name;
         }
 
-        // RENDER LOGIC (ISI TETAP SAMA)
-        function selectOp(el, op) {
-            document.querySelectorAll('.op-card').forEach(c => c.classList.remove('selected-item'));
-            el.classList.add('selected-item'); selOp = op;
-        }
-
-        function switchCat(cat) {
-            document.getElementById('tabP').className = cat==='pulsa' ? 'flex-1 py-3 rounded-xl text-[9px] font-black bg-blue-600' : 'flex-1 py-3 rounded-xl text-[9px] font-black text-gray-500';
-            document.getElementById('tabD').className = cat==='data' ? 'flex-1 py-3 rounded-xl text-[9px] font-black bg-blue-600' : 'flex-1 py-3 rounded-xl text-[9px] font-black text-gray-500';
-            document.getElementById('prodGrid').innerHTML = products[cat].map(x => `
-                <div onclick="selectProd(this, '${x.n}', '${x.p}')" class="glass p-5 rounded-2xl cursor-pointer border border-white/5 text-center">
-                    <p class="font-black text-xl">${x.n.split(' ')[0]}</p>
-                    <p class="text-[8px] text-blue-400 font-bold">Rp ${x.p}</p>
-                </div>
-            `).join('');
-        }
-
-        function selectProd(el, n, p) {
-            document.querySelectorAll('#prodGrid div').forEach(d => d.classList.remove('selected-item'));
-            el.classList.add('selected-item'); selPr = {n, p};
-        }
-
         function checkout() {
             const ph = document.getElementById('phone').value;
-            if(!ph || !selOp || !selPr || !selPay) return alert("Lengkapi data!");
+            if(!ph || !selOp || !selPr || !selPay) return alert("Mohon lengkapi pilihan transaksi!");
             if(selPay === 'BANK' && !selBank) return alert("Pilih Bank!");
             
             const finalPay = selPay === 'BANK' ? `BANK ${selBank}` : selPay;
@@ -235,7 +257,7 @@
             let logs = JSON.parse(localStorage.getItem('proto_logs')) || [];
             logs.unshift(trx);
             localStorage.setItem('proto_logs', JSON.stringify(logs));
-            alert("Berhasil!"); renderHistory();
+            alert("Pembayaran Berhasil!"); renderHistory();
         }
 
         function renderHistory() {
