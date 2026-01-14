@@ -18,70 +18,62 @@
         .no-scrollbar::-webkit-scrollbar { display: none; }
         
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-in { animation: fadeIn 0.6s ease-out forwards; }
+        .animate-in { animation: fadeIn 0.5s ease-out forwards; }
     </style>
 </head>
 <body class="font-sans antialiased" onload="checkAuth()">
 
     <div id="authScreen" class="fixed inset-0 z-[200] flex items-center justify-center bg-[#020617] p-6">
         <div class="w-full max-w-xl text-center animate-in">
-            <div class="w-24 h-24 bg-blue-600 rounded-[2.5rem] flex items-center justify-center mx-auto mb-8 shadow-[0_0_50px_rgba(59,130,246,0.4)]">
-                <i class="fa-solid fa-sim-card text-4xl text-white"></i>
+            <div class="w-20 h-20 bg-blue-600 rounded-[2rem] flex items-center justify-center mx-auto mb-8 shadow-2xl rotate-12">
+                <i class="fa-solid fa-sim-card text-3xl text-white"></i>
             </div>
-            <h1 class="text-3xl md:text-4xl font-black tracking-tighter mb-4 leading-tight">
+            <h1 class="text-3xl md:text-4xl font-black tracking-tighter mb-4 italic leading-tight">
                 PROTOTYPE JUAL PULSA <br> 
                 <span class="text-blue-500">& DATA ALL OPERATOR</span>
             </h1>
-            <p class="text-gray-500 font-bold tracking-[0.2em] text-[10px] md:text-[12px] uppercase mb-12">Simulasi Sistem Transaksi Digital</p>
+            <p class="text-gray-500 font-bold tracking-[0.2em] text-[10px] uppercase mb-10">Silahkan pilih metode login untuk memulai</p>
             
             <div class="max-w-xs mx-auto space-y-4">
                 <button onclick="showLoginForm('Google')" class="w-full flex items-center gap-4 bg-white/5 border border-white/10 p-5 rounded-2xl hover:bg-white/10 transition group">
                     <img src="https://www.gstatic.com/images/branding/product/1x/gsa_512dp.png" class="w-6 h-6">
-                    <span class="text-[11px] font-black uppercase tracking-widest">Login via Google</span>
-                    <i class="fa-solid fa-chevron-right ml-auto text-gray-700"></i>
+                    <span class="text-[11px] font-black uppercase tracking-widest">Login dengan Google</span>
                 </button>
                 <button onclick="showLoginForm('Facebook')" class="w-full flex items-center gap-4 bg-blue-600/10 border border-blue-600/20 p-5 rounded-2xl hover:bg-blue-600/20 transition group">
                     <i class="fa-brands fa-facebook text-blue-500 text-2xl"></i>
-                    <span class="text-[11px] font-black uppercase tracking-widest">Login via Facebook</span>
-                    <i class="fa-solid fa-chevron-right ml-auto text-blue-900"></i>
+                    <span class="text-[11px] font-black uppercase tracking-widest text-blue-100">Login dengan Facebook</span>
                 </button>
             </div>
         </div>
     </div>
 
-    <div id="loginFormModal" class="fixed inset-0 z-[210] flex items-center justify-center p-6 bg-[#020617]/95 backdrop-blur-2xl hidden-element">
+    <div id="loginFormModal" class="fixed inset-0 z-[210] flex items-center justify-center p-6 bg-[#020617]/95 backdrop-blur-xl hidden-element">
         <div class="glass w-full max-w-sm p-10 rounded-[3rem] animate-in">
-            <div class="text-center mb-8">
-                <h3 id="methodTitle" class="text-lg font-black uppercase tracking-[0.2em] text-blue-500"></h3>
-                <p class="text-[10px] text-gray-500 font-bold uppercase mt-1">Masukkan Detail Akun</p>
-            </div>
+            <h3 id="methodTitle" class="text-xl font-black text-center mb-8 uppercase tracking-widest text-blue-500"></h3>
             <div class="space-y-5">
-                <div class="bg-white/5 p-4 rounded-2xl border border-white/10 focus-within:border-blue-500 transition">
-                    <label class="text-[9px] font-black text-gray-400 uppercase mb-2 block tracking-widest">Email atau Username</label>
-                    <input type="email" id="userEmail" placeholder="admin@prototype.com" class="w-full bg-transparent text-sm outline-none text-white">
+                <div class="bg-white/5 p-4 rounded-2xl border border-white/10">
+                    <label class="text-[9px] font-black text-gray-500 uppercase mb-2 block tracking-widest">Email Simulasi</label>
+                    <input type="email" id="userEmail" placeholder="contoh@mail.com" class="w-full bg-transparent text-sm outline-none text-white">
                 </div>
-                <div class="bg-white/5 p-4 rounded-2xl border border-white/10 focus-within:border-blue-500 transition">
-                    <label class="text-[9px] font-black text-gray-400 uppercase mb-2 block tracking-widest">Password</label>
-                    <input type="password" value="********" class="w-full bg-transparent text-sm outline-none text-white">
+                <div class="bg-white/5 p-4 rounded-2xl border border-white/10">
+                    <label class="text-[9px] font-black text-gray-500 uppercase mb-2 block tracking-widest">Kata Sandi</label>
+                    <input type="password" id="userPass" placeholder="Masukkan Sandi" class="w-full bg-transparent text-sm outline-none text-white">
                 </div>
-                <button onclick="performLogin()" class="w-full bg-blue-600 py-5 rounded-2xl font-black uppercase text-[10px] tracking-widest hover:bg-blue-500 transition-all shadow-lg active:scale-95">Verifikasi Sesi</button>
-                <button onclick="cancelLogin()" class="w-full text-gray-600 text-[9px] font-black uppercase tracking-widest">Batalkan</button>
+                <button onclick="performLogin()" class="w-full bg-blue-600 py-5 rounded-2xl font-black uppercase text-[10px] tracking-widest">Verifikasi & Masuk</button>
+                <button onclick="cancelLogin()" class="w-full text-gray-600 text-[9px] font-black uppercase tracking-widest">Kembali</button>
             </div>
         </div>
     </div>
 
     <div id="dashboard" class="hidden-element">
         <nav class="sticky top-0 z-40 border-b border-white/5 glass px-8 py-5 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <i class="fa-solid fa-sim-card text-blue-500"></i>
-                <h1 class="text-sm md:text-base font-black italic tracking-tighter uppercase">Prototype <span class="text-blue-500">Digital</span></h1>
-            </div>
+            <h1 class="text-sm md:text-base font-black italic tracking-tighter uppercase">PROTOTYPE <span class="text-blue-500">JUAL PULSA</span></h1>
             <div class="flex items-center gap-4">
                 <div class="text-right">
                     <p id="navEmail" class="text-[8px] text-gray-500 italic lowercase"></p>
                     <p id="navMethod" class="text-[9px] font-black text-blue-400 uppercase tracking-widest"></p>
                 </div>
-                <button onclick="logout()" class="w-10 h-10 rounded-xl bg-red-500/10 text-red-500 flex items-center justify-center hover:bg-red-500 hover:text-white transition-all"><i class="fa-solid fa-power-off"></i></button>
+                <button onclick="logout()" class="w-10 h-10 rounded-xl bg-red-500/10 text-red-500 flex items-center justify-center"><i class="fa-solid fa-power-off"></i></button>
             </div>
         </nav>
 
@@ -115,30 +107,32 @@
                     </div>
                 </div>
 
-                <label class="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-4 block">2. Nomor Handphone</label>
+                <label class="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-4 block">2. Nomor HP</label>
                 <input type="number" id="phone" placeholder="08xxxxxxxxxx" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 text-2xl outline-none focus:border-blue-500 mb-8">
 
                 <div class="flex gap-2 p-1 glass rounded-2xl mb-4">
-                    <button onclick="switchCat('pulsa')" id="tabP" class="flex-1 py-3 rounded-xl text-[9px] font-black bg-blue-600 transition-all">ISI PULSA</button>
-                    <button onclick="switchCat('data')" id="tabD" class="flex-1 py-3 rounded-xl text-[9px] font-black text-gray-500 transition-all">PAKET DATA</button>
+                    <button onclick="switchCat('pulsa')" id="tabP" class="flex-1 py-3 rounded-xl text-[9px] font-black bg-blue-600">PULSA</button>
+                    <button onclick="switchCat('data')" id="tabD" class="flex-1 py-3 rounded-xl text-[9px] font-black text-gray-500">DATA</button>
                 </div>
                 <div id="prodGrid" class="grid grid-cols-2 gap-3 mb-8 max-h-[250px] overflow-y-auto pr-2 no-scrollbar"></div>
 
-                <label class="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-4 block">3. Metode Pembayaran</label>
-                <div class="grid grid-cols-2 gap-3 mb-10">
-                    <div onclick="selectPay(this, 'QRIS')" class="pay-card glass p-4 rounded-2xl cursor-pointer flex items-center gap-3 border border-white/5 transition-all">
-                        <i class="fa-solid fa-qrcode text-blue-400"></i><span class="text-[9px] font-black uppercase">QRIS Payment</span>
+                <label class="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-4 block">3. Pembayaran</label>
+                <div class="grid grid-cols-3 gap-3 mb-10"> <div onclick="selectPay(this, 'QRIS')" class="pay-card glass p-4 rounded-2xl cursor-pointer flex flex-col items-center gap-2 border border-white/5">
+                        <i class="fa-solid fa-qrcode text-blue-400"></i><span class="text-[8px] font-black uppercase">QRIS</span>
                     </div>
-                    <div onclick="selectPay(this, 'DANA')" class="pay-card glass p-4 rounded-2xl cursor-pointer flex items-center gap-3 border border-white/5 transition-all">
-                        <i class="fa-solid fa-wallet text-cyan-400"></i><span class="text-[9px] font-black uppercase">DANA / OVO</span>
+                    <div onclick="selectPay(this, 'DANA')" class="pay-card glass p-4 rounded-2xl cursor-pointer flex flex-col items-center gap-2 border border-white/5">
+                        <i class="fa-solid fa-wallet text-cyan-400"></i><span class="text-[8px] font-black uppercase">DANA</span>
+                    </div>
+                    <div onclick="selectPay(this, 'BANK')" class="pay-card glass p-4 rounded-2xl cursor-pointer flex flex-col items-center gap-2 border border-white/5">
+                        <i class="fa-solid fa-building-columns text-emerald-400"></i><span class="text-[8px] font-black uppercase">BANK</span>
                     </div>
                 </div>
 
-                <button onclick="checkout()" class="w-full bg-blue-600 py-5 rounded-2xl font-black uppercase text-[10px] tracking-widest shadow-[0_0_30px_rgba(59,130,246,0.3)] active:scale-95 transition-all">Proses Simulasi</button>
+                <button onclick="checkout()" class="w-full bg-blue-600 py-5 rounded-2xl font-black uppercase text-[10px] tracking-widest shadow-2xl active:scale-95 transition-all">Bayar Sekarang</button>
             </div>
 
             <div class="glass p-8 rounded-[2.5rem]">
-                <h3 class="text-[10px] font-black text-blue-400 tracking-[0.3em] uppercase mb-8">Log Transaksi Berhasil</h3>
+                <h3 class="text-[10px] font-black text-blue-400 tracking-[0.3em] uppercase mb-8">Riwayat Transaksi</h3>
                 <div id="historyList" class="space-y-4 max-h-[600px] overflow-y-auto no-scrollbar"></div>
             </div>
         </main>
@@ -147,8 +141,9 @@
     <script>
         const products = {
             pulsa: [
-                {n:'Pulsa 5K', p:'5.200'}, {n:'Pulsa 10K', p:'10.200'}, {n:'Pulsa 20K', p:'20.250'},
-                {n:'Pulsa 50K', p:'49.800'}, {n:'Pulsa 100K', p:'98.500'}, {n:'Pulsa 200K', p:'197.000'}
+                {n:'5.000', p:'5.200'}, {n:'10.000', p:'10.200'}, {n:'15.000', p:'15.300'},
+                {n:'20.000', p:'20.250'}, {n:'25.000', p:'25.100'}, {n:'50.000', p:'49.800'},
+                {n:'100.000', p:'98.500'}, {n:'200.000', p:'197.000'}
             ],
             data: [
                 {n:'1GB / 7 Hari', p:'12.000'}, {n:'5GB / 30 Hari', p:'45.000'},
@@ -177,12 +172,13 @@
             document.getElementById('loginFormModal').classList.remove('hidden-element');
         }
 
-        function cancelLogin() {
-            document.getElementById('loginFormModal').classList.add('hidden-element');
-        }
+        function cancelLogin() { document.getElementById('loginFormModal').classList.add('hidden-element'); }
 
         function performLogin() {
-            const email = document.getElementById('userEmail').value || "simulasi@prototype.com";
+            const email = document.getElementById('userEmail').value || "demo@mail.com";
+            const pass = document.getElementById('userPass').value;
+            if(!pass) return alert("Sandi tidak boleh kosong!"); // Mengharuskan isi sandi
+            
             localStorage.setItem('proto_email', email);
             localStorage.setItem('proto_method', activeMethod);
             location.reload();
@@ -198,7 +194,7 @@
             document.getElementById('tabD').className = cat==='data' ? 'flex-1 py-3 rounded-xl text-[9px] font-black bg-blue-600' : 'flex-1 py-3 rounded-xl text-[9px] font-black text-gray-500';
             document.getElementById('prodGrid').innerHTML = products[cat].map(x => `
                 <div onclick="selectProd(this, '${x.n}', '${x.p}')" class="glass p-5 rounded-2xl cursor-pointer border border-white/5 hover:border-blue-500 transition-all text-center">
-                    <p class="font-black text-xl uppercase">${x.n.includes('Pulsa') ? x.n.split(' ')[1] : x.n.split(' ')[0]}</p>
+                    <p class="font-black text-xl uppercase">${x.n.split(' ')[0]}</p>
                     <p class="text-[8px] text-blue-400 font-bold mt-1">Rp ${x.p}</p>
                 </div>
             `).join('');
@@ -216,12 +212,12 @@
 
         function checkout() {
             const ph = document.getElementById('phone').value;
-            if(!ph || !selOp || !selPr || !selPay) return alert("Error: Silahkan lengkapi semua pilihan transaksi.");
-            const trx = { id: 'TRX'+Date.now().toString().slice(-4), op: selOp, ...selPr, pay: selPay, ph, t: new Date().toLocaleTimeString() };
+            if(!ph || !selOp || !selPr || !selPay) return alert("Lengkapi pilihan!");
+            const trx = { id: 'INV'+Date.now().toString().slice(-4), op: selOp, ...selPr, pay: selPay, ph, t: new Date().toLocaleTimeString() };
             let logs = JSON.parse(localStorage.getItem('proto_logs')) || [];
             logs.unshift(trx);
             localStorage.setItem('proto_logs', JSON.stringify(logs));
-            alert("Berhasil: Simulasi transaksi selesai.");
+            alert("Simulasi Pembayaran Berhasil!");
             renderHistory();
         }
 
