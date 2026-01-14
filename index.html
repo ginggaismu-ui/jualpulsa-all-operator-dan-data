@@ -28,20 +28,19 @@
             <div class="w-20 h-20 bg-blue-600 rounded-[2rem] flex items-center justify-center mx-auto mb-8 shadow-2xl rotate-12">
                 <i class="fa-solid fa-sim-card text-3xl text-white"></i>
             </div>
-            <h1 class="text-3xl md:text-4xl font-black tracking-tighter mb-4 italic leading-tight">
-                PROTOTYPE JUAL PULSA <br> 
-                <span class="text-blue-500">& DATA ALL OPERATOR</span>
+            <h1 class="text-3xl md:text-4xl font-black tracking-tighter mb-4 italic leading-tight uppercase">
+                Prototype Jual Pulsa <br> 
+                <span class="text-blue-500">& Data All Operator</span>
             </h1>
-            <p class="text-gray-500 font-bold tracking-[0.2em] text-[10px] uppercase mb-10">Silahkan pilih metode login untuk memulai</p>
-            
+            <p class="text-gray-500 font-bold tracking-[0.2em] text-[10px] uppercase mb-10">Pilih Metode Akses</p>
             <div class="max-w-xs mx-auto space-y-4">
-                <button onclick="showLoginForm('Google')" class="w-full flex items-center gap-4 bg-white/5 border border-white/10 p-5 rounded-2xl hover:bg-white/10 transition group">
+                <button onclick="showLoginForm('Google')" class="w-full flex items-center gap-4 bg-white/5 border border-white/10 p-5 rounded-2xl hover:bg-white/10 transition">
                     <img src="https://www.gstatic.com/images/branding/product/1x/gsa_512dp.png" class="w-6 h-6">
-                    <span class="text-[11px] font-black uppercase tracking-widest">Login dengan Google</span>
+                    <span class="text-[11px] font-black uppercase tracking-widest">Login via Google</span>
                 </button>
-                <button onclick="showLoginForm('Facebook')" class="w-full flex items-center gap-4 bg-blue-600/10 border border-blue-600/20 p-5 rounded-2xl hover:bg-blue-600/20 transition group">
+                <button onclick="showLoginForm('Facebook')" class="w-full flex items-center gap-4 bg-blue-600/10 border border-blue-600/20 p-5 rounded-2xl hover:bg-blue-600/20 transition">
                     <i class="fa-brands fa-facebook text-blue-500 text-2xl"></i>
-                    <span class="text-[11px] font-black uppercase tracking-widest text-blue-100">Login dengan Facebook</span>
+                    <span class="text-[11px] font-black uppercase tracking-widest text-blue-100">Login via Facebook</span>
                 </button>
             </div>
         </div>
@@ -52,16 +51,33 @@
             <h3 id="methodTitle" class="text-xl font-black text-center mb-8 uppercase tracking-widest text-blue-500"></h3>
             <div class="space-y-5">
                 <div class="bg-white/5 p-4 rounded-2xl border border-white/10">
-                    <label class="text-[9px] font-black text-gray-500 uppercase mb-2 block tracking-widest">Email Simulasi</label>
-                    <input type="email" id="userEmail" placeholder="contoh@mail.com" class="w-full bg-transparent text-sm outline-none text-white">
+                    <label class="text-[9px] font-black text-gray-400 uppercase mb-2 block tracking-widest">Email</label>
+                    <input type="email" id="userEmail" placeholder="user@email.com" class="w-full bg-transparent text-sm outline-none text-white">
                 </div>
                 <div class="bg-white/5 p-4 rounded-2xl border border-white/10">
-                    <label class="text-[9px] font-black text-gray-500 uppercase mb-2 block tracking-widest">Kata Sandi</label>
-                    <input type="password" id="userPass" placeholder="Masukkan Sandi" class="w-full bg-transparent text-sm outline-none text-white">
+                    <label class="text-[9px] font-black text-gray-400 uppercase mb-2 block tracking-widest">Kata Sandi</label>
+                    <input type="password" id="userPass" placeholder="••••••••" class="w-full bg-transparent text-sm outline-none text-white">
                 </div>
-                <button onclick="performLogin()" class="w-full bg-blue-600 py-5 rounded-2xl font-black uppercase text-[10px] tracking-widest">Verifikasi & Masuk</button>
-                <button onclick="cancelLogin()" class="w-full text-gray-600 text-[9px] font-black uppercase tracking-widest">Kembali</button>
+                <button onclick="goToVerify()" class="w-full bg-blue-600 py-5 rounded-2xl font-black uppercase text-[10px] tracking-widest">Lanjutkan</button>
+                <button onclick="cancelLogin()" class="w-full text-gray-600 text-[9px] font-black uppercase">Kembali</button>
             </div>
+        </div>
+    </div>
+
+    <div id="verifyScreen" class="fixed inset-0 z-[220] flex items-center justify-center p-6 bg-[#020617] hidden-element">
+        <div class="text-center animate-in max-w-sm">
+            <div class="w-16 h-16 bg-blue-600/20 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                <i class="fa-solid fa-shield-check text-2xl"></i>
+            </div>
+            <h2 class="text-2xl font-black mb-2 uppercase tracking-tighter">Verifikasi Keamanan</h2>
+            <p class="text-[10px] text-gray-500 font-bold uppercase mb-8">Kami telah mengirim kode ke email anda</p>
+            <div class="flex gap-3 justify-center mb-8">
+                <input type="text" value="9" class="w-12 h-14 glass border border-white/20 rounded-xl text-center font-black text-xl" readonly>
+                <input type="text" value="0" class="w-12 h-14 glass border border-white/20 rounded-xl text-center font-black text-xl" readonly>
+                <input type="text" value="5" class="w-12 h-14 glass border border-white/20 rounded-xl text-center font-black text-xl" readonly>
+                <input type="text" value="X" class="w-12 h-14 glass border border-blue-500 rounded-xl text-center font-black text-xl outline-none focus:bg-blue-600/20">
+            </div>
+            <button onclick="performLogin()" class="w-full bg-blue-600 py-5 rounded-2xl font-black uppercase text-[10px] tracking-widest">Verifikasi Sekarang</button>
         </div>
     </div>
 
@@ -73,38 +89,20 @@
                     <p id="navEmail" class="text-[8px] text-gray-500 italic lowercase"></p>
                     <p id="navMethod" class="text-[9px] font-black text-blue-400 uppercase tracking-widest"></p>
                 </div>
-                <button onclick="logout()" class="w-10 h-10 rounded-xl bg-red-500/10 text-red-500 flex items-center justify-center"><i class="fa-solid fa-power-off"></i></button>
+                <button onclick="logout()" class="text-red-500"><i class="fa-solid fa-power-off"></i></button>
             </div>
         </nav>
 
         <main class="container mx-auto px-6 py-10 grid lg:grid-cols-2 gap-10">
             <div class="glass p-8 rounded-[2.5rem]">
                 <label class="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-4 block">1. Pilih Operator</label>
-                <div class="grid grid-cols-3 sm:grid-cols-6 gap-3 mb-8">
-                    <div onclick="selectOp(this, 'Telkomsel')" class="op-card glass p-3 rounded-2xl cursor-pointer flex flex-col items-center gap-2 border border-white/5 transition-all">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/bc/Telkomsel_2021_icon.svg" class="w-6 h-6">
-                        <span class="text-[7px] font-black">T-SEL</span>
-                    </div>
-                    <div onclick="selectOp(this, 'Indosat')" class="op-card glass p-3 rounded-2xl cursor-pointer flex flex-col items-center gap-2 border border-white/5 transition-all">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/Indosat_Ooredoo_Hutchison_logo.svg" class="w-6 h-6">
-                        <span class="text-[7px] font-black">ISAT</span>
-                    </div>
-                    <div onclick="selectOp(this, 'XL')" class="op-card glass p-3 rounded-2xl cursor-pointer flex flex-col items-center gap-2 border border-white/5 transition-all">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/55/XL_Axiata_logo_2016.svg" class="w-6 h-6">
-                        <span class="text-[7px] font-black">XL</span>
-                    </div>
-                    <div onclick="selectOp(this, 'Axis')" class="op-card glass p-3 rounded-2xl cursor-pointer flex flex-col items-center gap-2 border border-white/5 transition-all">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Axis_logo_2014.svg" class="w-6 h-6">
-                        <span class="text-[7px] font-black">AXIS</span>
-                    </div>
-                    <div onclick="selectOp(this, 'Tri')" class="op-card glass p-3 rounded-2xl cursor-pointer flex flex-col items-center gap-2 border border-white/5 transition-all">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/40/Three_Logo.svg" class="w-6 h-6">
-                        <span class="text-[7px] font-black">TRI</span>
-                    </div>
-                    <div onclick="selectOp(this, 'Smartfren')" class="op-card glass p-3 rounded-2xl cursor-pointer flex flex-col items-center gap-2 border border-white/5 transition-all">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Smartfren_logo.svg" class="w-6 h-6">
-                        <span class="text-[7px] font-black">SMART</span>
-                    </div>
+                <div class="grid grid-cols-6 gap-3 mb-8">
+                    <div onclick="selectOp(this, 'Telkomsel')" class="op-card glass p-3 rounded-2xl cursor-pointer flex flex-col items-center border border-white/5"><img src="https://upload.wikimedia.org/wikipedia/commons/b/bc/Telkomsel_2021_icon.svg" class="w-6 h-6"></div>
+                    <div onclick="selectOp(this, 'Indosat')" class="op-card glass p-3 rounded-2xl cursor-pointer flex flex-col items-center border border-white/5"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/Indosat_Ooredoo_Hutchison_logo.svg" class="w-6 h-6"></div>
+                    <div onclick="selectOp(this, 'XL')" class="op-card glass p-3 rounded-2xl cursor-pointer flex flex-col items-center border border-white/5"><img src="https://upload.wikimedia.org/wikipedia/commons/5/55/XL_Axiata_logo_2016.svg" class="w-6 h-6"></div>
+                    <div onclick="selectOp(this, 'Axis')" class="op-card glass p-3 rounded-2xl cursor-pointer flex flex-col items-center border border-white/5"><img src="https://upload.wikimedia.org/wikipedia/commons/8/83/Axis_logo_2014.svg" class="w-6 h-6"></div>
+                    <div onclick="selectOp(this, 'Tri')" class="op-card glass p-3 rounded-2xl cursor-pointer flex flex-col items-center border border-white/5"><img src="https://upload.wikimedia.org/wikipedia/commons/4/40/Three_Logo.svg" class="w-6 h-6"></div>
+                    <div onclick="selectOp(this, 'Smartfren')" class="op-card glass p-3 rounded-2xl cursor-pointer flex flex-col items-center border border-white/5"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Smartfren_logo.svg" class="w-6 h-6"></div>
                 </div>
 
                 <label class="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-4 block">2. Nomor HP</label>
@@ -114,10 +112,11 @@
                     <button onclick="switchCat('pulsa')" id="tabP" class="flex-1 py-3 rounded-xl text-[9px] font-black bg-blue-600">PULSA</button>
                     <button onclick="switchCat('data')" id="tabD" class="flex-1 py-3 rounded-xl text-[9px] font-black text-gray-500">DATA</button>
                 </div>
-                <div id="prodGrid" class="grid grid-cols-2 gap-3 mb-8 max-h-[250px] overflow-y-auto pr-2 no-scrollbar"></div>
+                <div id="prodGrid" class="grid grid-cols-2 gap-3 mb-8 max-h-[200px] overflow-y-auto no-scrollbar"></div>
 
-                <label class="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-4 block">3. Pembayaran</label>
-                <div class="grid grid-cols-3 gap-3 mb-10"> <div onclick="selectPay(this, 'QRIS')" class="pay-card glass p-4 rounded-2xl cursor-pointer flex flex-col items-center gap-2 border border-white/5">
+                <label class="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-4 block">3. Metode Pembayaran</label>
+                <div class="grid grid-cols-3 gap-3 mb-4">
+                    <div onclick="selectPay(this, 'QRIS')" class="pay-card glass p-4 rounded-2xl cursor-pointer flex flex-col items-center gap-2 border border-white/5">
                         <i class="fa-solid fa-qrcode text-blue-400"></i><span class="text-[8px] font-black uppercase">QRIS</span>
                     </div>
                     <div onclick="selectPay(this, 'DANA')" class="pay-card glass p-4 rounded-2xl cursor-pointer flex flex-col items-center gap-2 border border-white/5">
@@ -128,32 +127,32 @@
                     </div>
                 </div>
 
-                <button onclick="checkout()" class="w-full bg-blue-600 py-5 rounded-2xl font-black uppercase text-[10px] tracking-widest shadow-2xl active:scale-95 transition-all">Bayar Sekarang</button>
+                <div id="bankOptions" class="hidden-element grid grid-cols-2 gap-2 mb-8 animate-in">
+                    <div onclick="confirmBank(this, 'BCA')" class="bank-item glass p-3 rounded-xl cursor-pointer border border-white/10 text-center text-[10px] font-bold">BCA</div>
+                    <div onclick="confirmBank(this, 'MANDIRI')" class="bank-item glass p-3 rounded-xl cursor-pointer border border-white/10 text-center text-[10px] font-bold">MANDIRI</div>
+                    <div onclick="confirmBank(this, 'BNI')" class="bank-item glass p-3 rounded-xl cursor-pointer border border-white/10 text-center text-[10px] font-bold">BNI</div>
+                    <div onclick="confirmBank(this, 'BRI')" class="bank-item glass p-3 rounded-xl cursor-pointer border border-white/10 text-center text-[10px] font-bold">BRI</div>
+                </div>
+
+                <button onclick="checkout()" class="w-full bg-blue-600 py-5 rounded-2xl font-black uppercase text-[10px] tracking-widest shadow-2xl active:scale-95 transition-all mt-4">Bayar Sekarang</button>
             </div>
 
             <div class="glass p-8 rounded-[2.5rem]">
-                <h3 class="text-[10px] font-black text-blue-400 tracking-[0.3em] uppercase mb-8">Riwayat Transaksi</h3>
-                <div id="historyList" class="space-y-4 max-h-[600px] overflow-y-auto no-scrollbar"></div>
+                <h3 class="text-[10px] font-black text-blue-400 tracking-[0.3em] uppercase mb-8">Riwayat</h3>
+                <div id="historyList" class="space-y-4"></div>
             </div>
         </main>
     </div>
 
     <script>
         const products = {
-            pulsa: [
-                {n:'5.000', p:'5.200'}, {n:'10.000', p:'10.200'}, {n:'15.000', p:'15.300'},
-                {n:'20.000', p:'20.250'}, {n:'25.000', p:'25.100'}, {n:'50.000', p:'49.800'},
-                {n:'100.000', p:'98.500'}, {n:'200.000', p:'197.000'}
-            ],
-            data: [
-                {n:'1GB / 7 Hari', p:'12.000'}, {n:'5GB / 30 Hari', p:'45.000'},
-                {n:'10GB / 30 Hari', p:'72.000'}, {n:'Unlimited', p:'150.000'}
-            ]
+            pulsa: [{n:'5.000', p:'5.200'}, {n:'10.000', p:'10.200'}, {n:'50.000', p:'49.800'}, {n:'100.000', p:'98.500'}],
+            data: [{n:'1GB / 7 Hari', p:'12.000'}, {n:'10GB / 30 Hari', p:'72.000'}]
         };
 
-        let activeMethod = "";
-        let selOp = "", selPr = null, selPay = "";
+        let activeMethod = "", selOp = "", selPr = null, selPay = "", selBank = "";
 
+        // AUTH & VERIFY LOGIC
         function checkAuth() {
             const savedEmail = localStorage.getItem('proto_email');
             if(savedEmail) {
@@ -161,8 +160,7 @@
                 document.getElementById('dashboard').classList.remove('hidden-element');
                 document.getElementById('navEmail').innerText = savedEmail;
                 document.getElementById('navMethod').innerText = localStorage.getItem('proto_method');
-                switchCat('pulsa');
-                renderHistory();
+                switchCat('pulsa'); renderHistory();
             }
         }
 
@@ -174,16 +172,38 @@
 
         function cancelLogin() { document.getElementById('loginFormModal').classList.add('hidden-element'); }
 
-        function performLogin() {
-            const email = document.getElementById('userEmail').value || "demo@mail.com";
+        function goToVerify() {
+            const email = document.getElementById('userEmail').value;
             const pass = document.getElementById('userPass').value;
-            if(!pass) return alert("Sandi tidak boleh kosong!"); // Mengharuskan isi sandi
-            
+            if(!email || !pass) return alert("Email dan Sandi harus diisi!");
+            document.getElementById('loginFormModal').classList.add('hidden-element');
+            document.getElementById('verifyScreen').classList.remove('hidden-element');
+        }
+
+        function performLogin() {
+            const email = document.getElementById('userEmail').value;
             localStorage.setItem('proto_email', email);
             localStorage.setItem('proto_method', activeMethod);
             location.reload();
         }
 
+        // PAYMENT LOGIC
+        function selectPay(el, method) {
+            document.querySelectorAll('.pay-card').forEach(c => c.classList.remove('selected-item'));
+            el.classList.add('selected-item');
+            selPay = method;
+            selBank = "";
+            const bankMenu = document.getElementById('bankOptions');
+            method === 'BANK' ? bankMenu.classList.remove('hidden-element') : bankMenu.classList.add('hidden-element');
+        }
+
+        function confirmBank(el, name) {
+            document.querySelectorAll('.bank-item').forEach(b => b.classList.remove('selected-item'));
+            el.classList.add('selected-item');
+            selBank = name;
+        }
+
+        // RENDER LOGIC (ISI TETAP SAMA)
         function selectOp(el, op) {
             document.querySelectorAll('.op-card').forEach(c => c.classList.remove('selected-item'));
             el.classList.add('selected-item'); selOp = op;
@@ -193,9 +213,9 @@
             document.getElementById('tabP').className = cat==='pulsa' ? 'flex-1 py-3 rounded-xl text-[9px] font-black bg-blue-600' : 'flex-1 py-3 rounded-xl text-[9px] font-black text-gray-500';
             document.getElementById('tabD').className = cat==='data' ? 'flex-1 py-3 rounded-xl text-[9px] font-black bg-blue-600' : 'flex-1 py-3 rounded-xl text-[9px] font-black text-gray-500';
             document.getElementById('prodGrid').innerHTML = products[cat].map(x => `
-                <div onclick="selectProd(this, '${x.n}', '${x.p}')" class="glass p-5 rounded-2xl cursor-pointer border border-white/5 hover:border-blue-500 transition-all text-center">
-                    <p class="font-black text-xl uppercase">${x.n.split(' ')[0]}</p>
-                    <p class="text-[8px] text-blue-400 font-bold mt-1">Rp ${x.p}</p>
+                <div onclick="selectProd(this, '${x.n}', '${x.p}')" class="glass p-5 rounded-2xl cursor-pointer border border-white/5 text-center">
+                    <p class="font-black text-xl">${x.n.split(' ')[0]}</p>
+                    <p class="text-[8px] text-blue-400 font-bold">Rp ${x.p}</p>
                 </div>
             `).join('');
         }
@@ -205,20 +225,17 @@
             el.classList.add('selected-item'); selPr = {n, p};
         }
 
-        function selectPay(el, method) {
-            document.querySelectorAll('.pay-card').forEach(c => c.classList.remove('selected-item'));
-            el.classList.add('selected-item'); selPay = method;
-        }
-
         function checkout() {
             const ph = document.getElementById('phone').value;
-            if(!ph || !selOp || !selPr || !selPay) return alert("Lengkapi pilihan!");
-            const trx = { id: 'INV'+Date.now().toString().slice(-4), op: selOp, ...selPr, pay: selPay, ph, t: new Date().toLocaleTimeString() };
+            if(!ph || !selOp || !selPr || !selPay) return alert("Lengkapi data!");
+            if(selPay === 'BANK' && !selBank) return alert("Pilih Bank!");
+            
+            const finalPay = selPay === 'BANK' ? `BANK ${selBank}` : selPay;
+            const trx = { id: 'INV'+Date.now().toString().slice(-4), op: selOp, ...selPr, pay: finalPay, ph };
             let logs = JSON.parse(localStorage.getItem('proto_logs')) || [];
             logs.unshift(trx);
             localStorage.setItem('proto_logs', JSON.stringify(logs));
-            alert("Simulasi Pembayaran Berhasil!");
-            renderHistory();
+            alert("Berhasil!"); renderHistory();
         }
 
         function renderHistory() {
@@ -226,14 +243,11 @@
             document.getElementById('historyList').innerHTML = logs.map(l => `
                 <div class="glass p-5 rounded-3xl flex justify-between items-center animate-in">
                     <div>
-                        <p class="text-[8px] font-black text-blue-500 uppercase tracking-widest">${l.id} • ${l.pay}</p>
-                        <p class="text-[10px] text-gray-500 font-bold">${l.op} | ${l.ph}</p>
+                        <p class="text-[8px] font-black text-blue-500 uppercase">${l.id} • ${l.pay}</p>
+                        <p class="text-[10px] text-gray-400 font-bold">${l.op} | ${l.ph}</p>
                         <p class="text-lg font-black uppercase italic">${l.n}</p>
                     </div>
-                    <div class="text-right">
-                        <p class="text-xs font-black">Rp ${l.p}</p>
-                        <p class="text-[8px] font-black text-green-400 uppercase mt-1">SUCCESS</p>
-                    </div>
+                    <p class="text-xs font-black">Rp ${l.p}</p>
                 </div>
             `).join('');
         }
