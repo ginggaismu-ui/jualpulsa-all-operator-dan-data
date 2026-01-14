@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prototype Jual Pulsa & Data - Dev Version</title>
+    <title>Prototype Jual Pulsa & Data - Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -16,197 +16,206 @@
                 radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
             min-height: 100vh;
             color: white;
+            overflow-x: hidden;
         }
         .glass {
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .hidden-element { display: none; }
+        .hidden-element { display: none !important; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-pop { animation: slideUp 0.4s ease-out; }
-        #welcomeOverlay {
-            position: fixed; inset: 0; z-index: 100;
-            background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(20px);
-            display: flex; align-items: center; justify-content: center;
-            transition: opacity 0.8s ease;
-        }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade { animation: fadeIn 0.5s ease-out forwards; }
     </style>
 </head>
-<body class="font-sans antialiased" onload="renderHistory()">
+<body class="font-sans antialiased" onload="checkSession()">
 
-    <div id="welcomeOverlay">
+    <div id="welcomeOverlay" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/90 backdrop-blur-xl transition-all duration-700">
         <div class="text-center p-8 max-w-lg">
-            <div class="w-20 h-20 bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-2xl rotate-12">
-                <i class="fa-solid fa-bolt-lightning text-3xl text-white"></i>
+            <div class="w-20 h-20 bg-gradient-to-tr from-blue-600 to-indigo-500 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-2xl rotate-12">
+                <i class="fa-solid fa-bolt text-3xl text-white"></i>
             </div>
-            <h2 class="text-3xl font-bold mb-4">Halo, Selamat Datang!</h2>
-            <p class="text-gray-400 mb-8">Eksplorasi antarmuka pengisian pulsa masa depan dalam versi <span class="text-blue-400 font-bold text-xs border border-blue-400 px-2 py-1 rounded ml-1">PROTOTYPE</span></p>
-            <button onclick="closeWelcome()" class="bg-blue-600 text-white px-12 py-3 rounded-full font-bold shadow-lg hover:bg-blue-500 transition-all active:scale-95 uppercase text-xs tracking-widest">
-                Masuk Dashboard
+            <h2 class="text-4xl font-black mb-4 tracking-tighter">Halo, Sobat!</h2>
+            <p class="text-gray-400 mb-10 leading-relaxed">Silakan masuk ke akun prototype Anda untuk memulai simulasi pengisian pulsa dan data secara real-time.</p>
+            <button onclick="showLoginModal()" class="bg-blue-600 text-white px-12 py-4 rounded-2xl font-bold shadow-xl shadow-blue-500/20 hover:bg-blue-500 transition-all uppercase text-xs tracking-widest">
+                Mulai Sekarang
             </button>
         </div>
     </div>
 
-    <nav class="sticky top-0 z-40 border-b border-white/10 glass">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <h1 class="text-xl font-bold tracking-tighter uppercase">
-                <i class="fa-solid fa-flask text-indigo-400 mr-2"></i>Proto<span class="text-blue-400">Pulsa</span>
-            </h1>
-            <button onclick="toggleLogin()" class="bg-white/10 text-white px-6 py-2 rounded-full text-xs font-bold transition border border-white/20 hover:bg-white/20 uppercase tracking-widest">Login</button>
-        </div>
-    </nav>
-
-    <main class="container mx-auto px-6 py-12 flex flex-col lg:flex-row gap-12">
-        
-        <div class="lg:w-1/2 w-full">
-            <div class="glass p-8 rounded-[2.5rem] border border-white/20">
-                <h3 class="text-lg font-bold mb-6 text-gray-300 uppercase tracking-widest text-center">Form Transaksi</h3>
-                
-                <div class="mb-6">
-                    <div class="flex justify-between items-center mb-2">
-                        <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Nomor Tujuan</label>
-                        <span id="providerIcon" class="text-[9px] font-bold text-blue-400 opacity-0 bg-blue-500/10 px-2 py-0.5 rounded italic">Detecting</span>
-                    </div>
-                    <input type="number" id="phoneInput" placeholder="08xxxxxxxxxx" class="w-full bg-white/5 border border-white/10 rounded-2xl px-5 py-4 focus:ring-2 focus:ring-blue-500 outline-none text-white text-xl">
-                </div>
-
-                <div class="grid grid-cols-2 gap-3 mb-8">
-                    <div onclick="selectItem(this, '10.000', '10.150')" class="item-select glass p-4 rounded-2xl cursor-pointer border border-white/5 hover:border-blue-500/40 transition-all text-center">
-                        <p class="font-bold text-lg">10.000</p>
-                        <p class="text-blue-400 text-xs font-bold">Rp 10.150</p>
-                    </div>
-                    <div onclick="selectItem(this, '50.000', '49.500')" class="item-select glass p-4 rounded-2xl cursor-pointer border border-white/5 hover:border-blue-500/40 transition-all text-center">
-                        <p class="font-bold text-lg">50.000</p>
-                        <p class="text-blue-400 text-xs font-bold">Rp 49.500</p>
-                    </div>
-                </div>
-
-                <button onclick="processOrder()" class="w-full bg-blue-600 text-white font-bold py-5 rounded-2xl shadow-xl hover:bg-blue-500 transition-all active:scale-95 uppercase text-xs tracking-widest">Konfirmasi Transaksi</button>
-            </div>
-        </div>
-
-        <div class="lg:w-1/2 w-full">
-            <div class="glass p-8 rounded-[2.5rem] border border-white/20 min-h-[400px]">
-                <div class="flex justify-between items-center mb-8">
-                    <h3 class="text-lg font-bold text-gray-300 uppercase tracking-widest">Riwayat Simulasi</h3>
-                    <button onclick="clearHistory()" class="text-[9px] text-red-400 font-bold uppercase border border-red-400/30 px-3 py-1 rounded-full">Reset</button>
-                </div>
-                <div id="historyContainer" class="space-y-4 max-h-[400px] overflow-y-auto no-scrollbar"></div>
-            </div>
-        </div>
-    </main>
-
-    <div id="loginModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden-element">
-        <div class="glass w-full max-w-sm p-10 rounded-[3rem] relative border border-white/10 animate-pop">
-            <button onclick="toggleLogin()" class="absolute top-8 right-8 text-gray-500 hover:text-white transition text-2xl">&times;</button>
-            
-            <div class="text-center mb-10">
-                <h3 class="text-2xl font-bold mb-2">Masuk Akun</h3>
-                <p class="text-gray-500 text-xs">Akses semua fitur prototype kami</p>
+    <div id="loginModal" class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/60 backdrop-blur-md hidden-element">
+        <div class="glass w-full max-w-sm p-10 rounded-[3rem] relative border border-white/10 animate-fade">
+            <div class="text-center mb-8">
+                <h3 class="text-2xl font-bold mb-2">Login Prototype</h3>
+                <p class="text-gray-500 text-xs">Pilih metode login simulasi</p>
             </div>
 
-            <div class="space-y-3 mb-8">
-                <button class="w-full flex items-center justify-center gap-3 bg-white/5 border border-white/10 py-3 rounded-xl hover:bg-white/10 transition">
+            <div class="space-y-3">
+                <button onclick="simulateLogin('Google')" class="w-full flex items-center justify-center gap-3 bg-white/5 border border-white/10 py-4 rounded-2xl hover:bg-white/10 transition">
                     <img src="https://www.gstatic.com/images/branding/product/1x/gsa_512dp.png" class="w-5 h-5" alt="Google">
-                    <span class="text-xs font-bold tracking-widest uppercase">Login with Google</span>
+                    <span class="text-xs font-bold tracking-widest uppercase">Google Login</span>
                 </button>
-                <button class="w-full flex items-center justify-center gap-3 bg-[#1877F2]/20 border border-[#1877F2]/30 py-3 rounded-xl hover:bg-[#1877F2]/30 transition">
-                    <i class="fa-brands fa-facebook text-[#1877F2] text-lg"></i>
-                    <span class="text-xs font-bold tracking-widest uppercase">Facebook Login</span>
-                </button>
-                <button class="w-full flex items-center justify-center gap-3 bg-white/90 border border-white/10 py-3 rounded-xl hover:bg-white transition text-black">
-                    <i class="fa-brands fa-apple text-xl"></i>
-                    <span class="text-xs font-bold tracking-widest uppercase">Apple ID</span>
+                <button onclick="simulateLogin('Facebook')" class="w-full flex items-center justify-center gap-3 bg-blue-600/20 border border-blue-500/30 py-4 rounded-2xl hover:bg-blue-600/30 transition">
+                    <i class="fa-brands fa-facebook text-blue-500 text-xl"></i>
+                    <span class="text-xs font-bold tracking-widest uppercase">Facebook</span>
                 </button>
             </div>
 
-            <div class="relative flex py-5 items-center">
+            <div class="relative flex py-8 items-center">
                 <div class="flex-grow border-t border-white/10"></div>
-                <span class="flex-shrink mx-4 text-gray-500 text-[10px] uppercase font-bold tracking-widest">Atau via Email</span>
+                <span class="flex-shrink mx-4 text-gray-600 text-[10px] font-bold tracking-widest uppercase">Development Only</span>
                 <div class="flex-grow border-t border-white/10"></div>
             </div>
-
-            <div class="space-y-4 mb-4">
-                <input type="email" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-xs outline-none focus:border-blue-500 transition" placeholder="Email Demo">
-                <button onclick="toggleLogin()" class="w-full bg-blue-600 py-4 rounded-xl font-bold uppercase text-[10px] tracking-widest">Lanjutkan</button>
-            </div>
+            
+            <button onclick="toggleLoginModal()" class="w-full text-gray-500 text-[10px] font-bold uppercase tracking-widest">Batal</button>
         </div>
     </div>
 
-    <script>
-        function closeWelcome() {
-            document.getElementById('welcomeOverlay').style.opacity = '0';
-            setTimeout(() => document.getElementById('welcomeOverlay').classList.add('hidden-element'), 800);
-        }
-
-        function toggleLogin() {
-            document.getElementById('loginModal').classList.toggle('hidden-element');
-        }
-
-        function selectItem(el, nominal, price) {
-            document.querySelectorAll('.item-select').forEach(i => i.classList.remove('border-blue-500', 'bg-blue-600/10', 'ring-1', 'ring-blue-500'));
-            el.classList.add('border-blue-500', 'bg-blue-600/10', 'ring-1', 'ring-blue-500');
-            window.lastSelected = { nominal, price };
-        }
-
-        function processOrder() {
-            const phone = document.getElementById('phoneInput').value;
-            if(!phone || !window.lastSelected) return alert("Nomor HP dan Nominal harus diisi!");
-
-            const trx = {
-                id: 'INV-' + Date.now().toString().slice(-6),
-                phone, ...window.lastSelected,
-                date: new Date().toLocaleTimeString(),
-                status: 'SUKSES'
-            };
-
-            let history = JSON.parse(localStorage.getItem('proto_trx')) || [];
-            history.unshift(trx);
-            localStorage.setItem('proto_trx', JSON.stringify(history));
-            renderHistory();
-            alert("Simulasi Transaksi Berhasil!");
-        }
-
-        function renderHistory() {
-            const container = document.getElementById('historyContainer');
-            const history = JSON.parse(localStorage.getItem('proto_trx')) || [];
-            if(history.length === 0) return container.innerHTML = '<div class="text-center py-20 text-gray-600 text-xs">BELUM ADA DATA</div>';
-            
-            container.innerHTML = history.map(t => `
-                <div class="glass p-5 rounded-2xl border-white/5">
-                    <div class="flex justify-between items-center mb-3">
-                        <span class="text-[9px] font-bold text-blue-400 tracking-widest uppercase">${t.id}</span>
-                        <span class="text-[8px] bg-green-500/20 text-green-400 px-2 py-0.5 rounded font-bold">${t.status}</span>
+    <div id="mainContent" class="hidden-element">
+        <nav class="sticky top-0 z-40 border-b border-white/10 glass">
+            <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+                <h1 class="text-xl font-black tracking-tighter uppercase italic">
+                    <span class="text-blue-500">Proto</span>Pulsa
+                </h1>
+                <div class="flex items-center gap-4">
+                    <div class="text-right hidden sm:block">
+                        <p id="userNameDisplay" class="text-[10px] font-bold text-white uppercase tracking-widest">User Demo</p>
+                        <p class="text-[9px] text-green-400 font-bold uppercase">Online</p>
                     </div>
-                    <p class="font-bold text-lg mb-1">Pulsa ${t.nominal}</p>
-                    <div class="flex justify-between items-end">
-                        <p class="text-[10px] text-gray-500">${t.phone} • ${t.date}</p>
-                        <p class="text-xs font-bold text-white">Rp ${t.price}</p>
-                    </div>
+                    <button onclick="simulateLogout()" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-red-400 hover:bg-red-500/10 transition">
+                        <i class="fa-solid fa-power-off text-sm"></i>
+                    </button>
                 </div>
-            `).join('');
-        }
+            </div>
+        </nav>
 
-        function clearHistory() {
-            if(confirm("Hapus history simulasi?")) {
-                localStorage.removeItem('proto_trx');
+        <main class="container mx-auto px-6 py-10 grid lg:grid-cols-2 gap-10 animate-fade">
+            <div class="glass p-8 rounded-[2.5rem] border border-white/10">
+                <h3 class="text-sm font-bold mb-8 uppercase tracking-[0.2em] text-blue-400">Transaksi Baru</h3>
+                
+                <div class="space-y-6">
+                    <div>
+                        <label class="text-[10px] font-bold text-gray-500 uppercase tracking-widest ml-1 block mb-2">Nomor Tujuan</label>
+                        <input type="number" id="phoneInput" placeholder="08xxxxxxxxxx" class="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 outline-none focus:ring-2 focus:ring-blue-500 text-white text-xl">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div onclick="selectNominal(this, '10.000', '10.200')" class="nominal-card glass p-5 rounded-2xl cursor-pointer border border-white/5 hover:border-blue-500 transition-all">
+                            <p class="text-[10px] text-gray-500 uppercase font-bold">Pulsa</p>
+                            <p class="text-xl font-black">10K</p>
+                            <p class="text-blue-400 text-xs font-bold mt-1">Rp 10.200</p>
+                        </div>
+                        <div onclick="selectNominal(this, '50.000', '49.800')" class="nominal-card glass p-5 rounded-2xl cursor-pointer border border-white/5 hover:border-blue-500 transition-all">
+                            <p class="text-[10px] text-gray-500 uppercase font-bold">Pulsa</p>
+                            <p class="text-xl font-black">50K</p>
+                            <p class="text-blue-400 text-xs font-bold mt-1">Rp 49.800</p>
+                        </div>
+                    </div>
+
+                    <button onclick="handleCheckout()" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 py-5 rounded-2xl font-black uppercase text-xs tracking-[0.2em] shadow-xl hover:shadow-blue-500/20 active:scale-95 transition-all">Bayar Sekarang</button>
+                </div>
+            </div>
+
+            <div class="glass p-8 rounded-[2.5rem] border border-white/10 min-h-[400px]">
+                <h3 class="text-sm font-bold mb-8 uppercase tracking-[0.2em] text-indigo-400">Riwayat Terakhir</h3>
+                <div id="historyList" class="space-y-4"></div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Session Management
+        function checkSession() {
+            const user = localStorage.getItem('proto_user');
+            if (user) {
+                document.getElementById('welcomeOverlay').classList.add('hidden-element');
+                document.getElementById('mainContent').classList.remove('hidden-element');
+                document.getElementById('userNameDisplay').innerText = user;
                 renderHistory();
             }
         }
 
-        document.getElementById('phoneInput').addEventListener('input', function(e) {
-            const val = e.target.value;
-            const icon = document.getElementById('providerIcon');
-            icon.style.opacity = val.length >= 4 ? "1" : "0";
-            if(val.startsWith('081')) icon.innerText = "TELKOMSEL";
-            else if(val.startsWith('085')) icon.innerText = "INDOSAT";
-            else icon.innerText = "SIMULASI";
-        });
+        function showLoginModal() {
+            document.getElementById('loginModal').classList.remove('hidden-element');
+        }
+
+        function toggleLoginModal() {
+            document.getElementById('loginModal').classList.add('hidden-element');
+        }
+
+        function simulateLogin(provider) {
+            const userName = "User " + provider;
+            localStorage.setItem('proto_user', userName);
+            
+            // Animasi transisi login
+            document.getElementById('loginModal').classList.add('hidden-element');
+            document.getElementById('welcomeOverlay').style.opacity = '0';
+            
+            setTimeout(() => {
+                document.getElementById('welcomeOverlay').classList.add('hidden-element');
+                document.getElementById('mainContent').classList.remove('hidden-element');
+                document.getElementById('userNameDisplay').innerText = userName;
+                renderHistory();
+            }, 500);
+        }
+
+        function simulateLogout() {
+            localStorage.removeItem('proto_user');
+            location.reload();
+        }
+
+        // Transaction Logic
+        let selectedItem = null;
+
+        function selectNominal(el, nom, price) {
+            document.querySelectorAll('.nominal-card').forEach(c => c.classList.remove('border-blue-500', 'bg-blue-600/10'));
+            el.classList.add('border-blue-500', 'bg-blue-600/10');
+            selectedItem = { nom, price };
+        }
+
+        function handleCheckout() {
+            const phone = document.getElementById('phoneInput').value;
+            if (!phone || !selectedItem) return alert("Nomor dan Nominal harus dipilih!");
+
+            const trx = {
+                id: 'INV-' + Math.floor(Math.random() * 100000),
+                phone, ...selectedItem,
+                date: new Date().toLocaleTimeString()
+            };
+
+            let logs = JSON.parse(localStorage.getItem('proto_logs')) || [];
+            logs.unshift(trx);
+            localStorage.setItem('proto_logs', JSON.stringify(logs));
+            
+            alert("Transaksi Simulasi Berhasil!");
+            renderHistory();
+        }
+
+        function renderHistory() {
+            const list = document.getElementById('historyList');
+            const logs = JSON.parse(localStorage.getItem('proto_logs')) || [];
+            if(logs.length === 0) {
+                list.innerHTML = `<div class="text-center py-20 opacity-20 text-xs">BELUM ADA TRANSAKSI</div>`;
+                return;
+            }
+            list.innerHTML = logs.map(l => `
+                <div class="glass p-5 rounded-2xl border-white/5 animate-fade">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-[9px] font-black text-blue-500 uppercase tracking-widest">${l.id}</span>
+                        <span class="text-[8px] bg-green-500/20 text-green-400 px-2 py-0.5 rounded font-bold uppercase">Sukses</span>
+                    </div>
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <p class="text-xs text-gray-400">${l.phone}</p>
+                            <p class="font-black text-lg">Pulsa ${l.nom}</p>
+                        </div>
+                        <p class="font-bold text-white text-sm italic">Rp ${l.price}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
     </script>
 </body>
 </html>
